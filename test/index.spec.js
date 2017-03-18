@@ -1,0 +1,92 @@
+import should from 'should';
+import Banner from '../dist/storm-banner';
+import 'jsdom-global/register';
+
+const html = `<div class="js-banner">
+              <button class="js-banner__close"></div>
+            </div>`;
+
+document.body.innerHTML = html;
+  
+let components = Banner.init('.js-banner'),
+    componentsTwo = Banner.init.call(Banner, '.js-banner');
+
+
+describe('Initialisation', () => {
+
+  it('should return array of length 1', () => {
+
+    should(components)
+      .Array()
+      .and.have.lengthOf(1);
+
+  });
+
+  it('each array item should be an object with DOMElement, settings, init, and  handleClick properties', () => {
+
+    // components[0].should.be.an.instanceOf(Object).and.not.empty();
+    // components[0].should.have.property('DOMElement');
+    // components[0].should.have.property('settings').Object();
+    // components[0].should.have.property('init').Function()
+    // components[0].should.have.property('handleClick').Function();
+
+  });
+
+
+  it('should attach the handleClick eventListener to DOMElement click event to toggle className', () => {
+
+    // components[0].DOMElement.click();
+    // Array.from(components[0].DOMElement.classList).should.containEql('clicked');
+    // components[0].DOMElement.click();
+    // Array.from(components[0].DOMElement.classList).should.not.containEql('clicked');
+
+  });
+
+
+  it('should throw an error if no elements are found', () => {
+
+    // Banner.init.bind(Banner, '.js-err').should.throw();
+
+  })
+  
+  it('should initialisation with different settings if different options are passed', () => {
+
+    // should(componentsTwo[0].settings.callback).not.equal(components[0].settings.callback);
+  
+  });
+
+});
+
+
+describe('Callbacks', () => {
+
+  // it('should be passed in options', () => {
+
+  //   should(components[0].settings.callback).null();
+  //   should(componentsTwo[0].settings.callback).Function();
+
+  // });
+
+  // it('should execute in the context of the component', () => {
+
+  //   componentsTwo[0].DOMElement.click();
+  //   Array.from(componentsTwo[0].DOMElement.classList).should.containEql('callback-test');
+  //   componentsTwo[0].DOMElement.click();
+  //   Array.from(componentsTwo[0].DOMElement.classList).should.not.containEql('callback-test');
+
+  // });
+
+});
+
+describe('Component API', () => {
+
+  // it('should trigger the handleClick function toggling the className', () => {
+
+  //   components[0].handleClick();
+  //   Array.from(components[0].DOMElement.classList).should.containEql('clicked');
+  //   components[0].handleClick();
+  //   Array.from(components[0].DOMElement.classList).should.not.containEql('clicked');
+
+  //  });
+
+});
