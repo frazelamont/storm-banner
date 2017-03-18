@@ -40,7 +40,7 @@ import Banner from 'storm-banner';
 
 Banner.init('.js-banner');
 ```
-aynchronous browser loading (use the .standalone version in the /dist folder) using the global name (Storm + capitalised package name)
+asynchronous browser loading (use the .standalone version in the /dist folder) using the global name (Storm + capitalised package name)
 ```
 import Load from 'storm-load';
 
