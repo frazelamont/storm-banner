@@ -28,7 +28,7 @@ Sample minimum CSS required
 .off--banner {
     display: none;
 }
-``
+```
 
 JS
 ```
