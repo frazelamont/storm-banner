@@ -1,9 +1,3 @@
-/**
- * @name storm-banner: Dismissible message banner saved to either sessionStorage or localStorage.
- * @version 0.1.0: Thu, 04 May 2017 13:37:54 GMT
- * @author stormid
- * @license MIT
- */
 import defaults from './libs/defaults';
 import componentPrototype from './libs/component-prototype';
 
