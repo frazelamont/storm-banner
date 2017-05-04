@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/mjbp/storm-banner/issues"
   },
-  "main": "dist/storm-banner.js",
+  "main": "dist/index.js",
   "keywords": [
     "stormid",
     "ui",

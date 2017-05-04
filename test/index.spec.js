@@ -1,5 +1,5 @@
 import should from 'should';
-import Banner from '../dist/storm-banner';
+import Banner from '../dist/storm-banner.standalone';
 import 'jsdom-global/register';
 
 const html = `<div class="js-banner">

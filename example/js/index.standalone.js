@@ -1,6 +1,6 @@
 /**
  * @name storm-banner: Dismissible message banner saved to either sessionStorage or localStorage.
- * @version 0.1.0: Thu, 04 May 2017 13:58:30 GMT
+ * @version 0.1.0: Thu, 04 May 2017 13:49:14 GMT
  * @author stormid
  * @license MIT
  */

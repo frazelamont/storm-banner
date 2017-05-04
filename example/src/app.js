@@ -1,4 +1,4 @@
-import Banner from './libs/storm-banner';
+import Banner from './libs/component/';
 
 const onDOMContentLoadedTasks = [() => {
     Banner.init('.js-banner');
