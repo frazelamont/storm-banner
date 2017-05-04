@@ -22,6 +22,18 @@
     "localStorage",
     "sessionStorage"
   ],
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
   "scripts": {
     "build": "node_modules/.bin/gulp build",
     "serve": "node_modules/.bin/gulp server",
