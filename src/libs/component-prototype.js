@@ -1,3 +1,5 @@
+const clickEvent = window.PointerEvent ? 'pointerdown' : 'ontouchstart' in window ? 'touchstart' : 'click'
+		
 export default {
 	init() {
 		if(!this.test()) return;
@@ -11,7 +13,7 @@ export default {
 	},
 	show(){
 		this.node.classList.remove(this.settings.offClassName);
-        this.node.querySelector(this.settings.closeBtnSelector).addEventListener('click', this.hide.bind(this));
+        this.node.querySelector(this.settings.closeBtnSelector).addEventListener(clickEvent, this.hide.bind(this));
 	},
 	hide() {
         window[`${this.settings.storageType}Storage`].setItem(this.settings.storageName, this.settings.storageValue);

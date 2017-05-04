@@ -10,8 +10,7 @@ const init = (sel, opts) => {
 	return els.map(el => {
 		return Object.assign(Object.create(componentPrototype), {
 			node: el,
-			settings: Object.assign({}, defaults, opts),
-			triggerEvent: window.PointerEvent ? 'pointerdown' : 'ontouchstart' in window ? 'touchstart' : 'click'
+			settings: Object.assign({}, defaults, opts)
 		}).init();
 	});
 };
