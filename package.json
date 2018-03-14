@@ -1,15 +1,15 @@
 {
   "name": "storm-banner",
   "version": "0.2.5",
-  "description": "Dismissible message banner saved to either sessionStorage or localStorage.",
+  "description": "Dismissible message banner saved to either sessionStorage, localStorage, or cookies.",
   "author": "stormid",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mjbp/storm-banner.git"
+    "url": "https://github.com/stormid/storm-banner.git"
   },
   "bugs": {
-    "url": "https://github.com/mjbp/storm-banner/issues"
+    "url": "https://github.com/stormid/storm-banner/issues"
   },
   "main": "dist/index.js",
   "keywords": [
@@ -56,6 +56,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-rollup": "^2.15.0",
     "gulp-uglify": "^2.0.0",
     "gulp-wrap-umd": "^0.2.1",
     "istanbul": "^1.1.0-alpha.1",
@@ -63,14 +64,11 @@
     "jsdom-global": "^2.1.0",
     "mocha": "^3.5.3",
     "object-assign": "^4.0.1",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "run-sequence": "^1.1.0",
     "should": "^11.1.1",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^1.1.2"
-  },
-  "dependencies": {
-    "gulp-rollup": "^2.15.0",
-    "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-node-resolve": "^3.0.0"
   }
 }
