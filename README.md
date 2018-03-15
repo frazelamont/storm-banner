@@ -51,13 +51,9 @@ Load('{{path}}/storm-banner.standalone.js')
 ## Options
 ```
 {
-    closeBtnSelector: '.js-banner__close',  //className of the close button
-	hiddenBanner: 'off--banner',    //className to hide banner initially
-	template(sel){
-        /*
-         * Function returning template string
-         * selector passed to init function is passed through here
-        */
+    closeBtnSelector: '.js-banner__close',//className of the close button
+	hiddenBanner: 'off--banner',//className to hide banner initially
+	template(sel){//Function returning template string, sel is selector passed to init function
 		return `<div${!!~sel.indexOf('#') ? `id="${sel.substr(1)}"` : ''} class="${!~sel.indexOf('#') ? sel.substr(1) : ''} banner" role="dialog" aria-label="welcome">
 				<div class="banner_msg">
 					Welcome. This site uses cookies. Read <a class="banner__link" href="/info/cookies">our policy</a>.
@@ -70,17 +66,13 @@ Load('{{path}}/storm-banner.standalone.js')
 				</button>
 			</div>`;
 	},
-	dismiss(banner){ 
-        /*
-         * function executed when dismissed
-         * banner DOM node is passed as only argument
-        */
-        banner.parentNode.removeChild(banner);
-    },
+	dismiss(banner){//function executed when dismissed, banner DOM node is passed as only argument
+		banner.parentNode.removeChild(banner);
+	},
 	type: 'cookie',//localStorage || sessionStorage || cookie
-	name: '__STORMID_MSG__',    //string used as cookie/session/localStorage name
-	value: 'acknowledged',  //string used as cookie/session/localStorage value
-	cookie: {   //other cookie settings
+	name: '__STORMID_MSG__',//string used as cookie/session/localStorage name
+	value: 'acknowledged',//string used as cookie/session/localStorage value
+	cookie: {//other cookie settings
 		path: '/',
 		domain: '',
 		secure: '',
