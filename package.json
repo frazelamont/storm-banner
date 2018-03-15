@@ -1,6 +1,6 @@
 {
   "name": "storm-banner",
-  "version": "0.2.5",
+  "version": "1.0.0",
   "description": "Dismissible message banner saved to either sessionStorage, localStorage, or cookies. For cookie messages or any one-time notification.",
   "author": "stormid",
   "license": "MIT",
