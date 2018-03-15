@@ -9,6 +9,7 @@ Dismissible message banner saved to either sessionStorage, localStorage, or cook
 
 ## Usage
 HTML
+
 HTML is optional. If you choose not to supply any DOM the banner will be rendered for you - you can configure the banner by supplying a custom template function in the configuration object (see options below).
 
 If using cookies, you could read cookie server-side and conditionally server-render the banner. YOu would just need to add classNames to match your configuration (or the defaults).
@@ -50,9 +51,13 @@ Load('{{path}}/storm-banner.standalone.js')
 ## Options
 ```
 {
-    closeBtnSelector: '.js-banner__close',//className of the close button
-	hiddenBanner: 'off--banner',//className to hide banner initially
-	template(sel){ //function returngin template string, selector passed to init function is passed through here
+    closeBtnSelector: '.js-banner__close',  //className of the close button
+	hiddenBanner: 'off--banner',    //className to hide banner initially
+	template(sel){
+        /*
+         * Function returning template string
+         * selector passed to init function is passed through here
+        */
 		return `<div${!!~sel.indexOf('#') ? `id="${sel.substr(1)}"` : ''} class="${!~sel.indexOf('#') ? sel.substr(1) : ''} banner" role="dialog" aria-label="welcome">
 				<div class="banner_msg">
 					Welcome. This site uses cookies. Read <a class="banner__link" href="/info/cookies">our policy</a>.
@@ -65,11 +70,17 @@ Load('{{path}}/storm-banner.standalone.js')
 				</button>
 			</div>`;
 	},
-	dismiss(banner){ banner.parentNode.removeChild(banner); },//function executed when dismissed, you could add all kinds of actions or effects here, banner DOM node is passed as only argument
+	dismiss(banner){ 
+        /*
+         * function executed when dismissed
+         * banner DOM node is passed as only argument
+        */
+        banner.parentNode.removeChild(banner);
+    },
 	type: 'cookie',//localStorage || sessionStorage || cookie
-	name: '__STORMID_MSG__',//string used as cookie/session/localStorage name
-	value: 'acknowledged',//string used as cookie/session/localStorage value
-	cookie: {//other cookie settings
+	name: '__STORMID_MSG__',    //string used as cookie/session/localStorage name
+	value: 'acknowledged',  //string used as cookie/session/localStorage value
+	cookie: {   //other cookie settings
 		path: '/',
 		domain: '',
 		secure: '',
