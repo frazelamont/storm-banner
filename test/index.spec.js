@@ -2,91 +2,80 @@ import should from 'should';
 import 'jsdom-global/register';
 import Banner from '../dist/storm-banner.standalone';
 
-const html = `<div class="js-banner">
+const html = `<div class="js-cookie-banner">
+              <button class="js-banner__close"></div>
+            </div>
+            <div class="js-sessionStorage-banner">
               <button class="js-banner__close"></div>
             </div>`;
 
 document.body.innerHTML = html;
+
+//storage shim
+window.localStorage = window.sessionStorage = {
+  getItem: function (key) {
+      return this[key];
+  },
+  setItem: function (key, value) {
+      this[key] = value;
+  }
+};
   
-let components = Banner.init('.js-banner'),
-    componentsTwo = Banner.init.call(Banner, '.js-banner');
+let cookieBanner = Banner.init('.js-cookie-banner', {
+      callback(){
+        return document.body.classList.add('foo');
+      }
+    }),
+    sessionStorageBanner = Banner.init('.js-sessionStorage-banner', { type: 'sessionStorage'});
 
 
 describe('Initialisation', () => {
 
-  it('should return array of length 1', () => {
+  it('should return an Object with one property, a \'dismiss\' function', () => {
 
-    should(components)
-      .Array()
-      .and.have.lengthOf(1);
+    cookieBanner.should.be.an.instanceOf(Object);
+    cookieBanner.should.have.property('dismiss');
 
-  });
-
-  it('each array item should be an object with DOMElement, settings, init, and  handleClick properties', () => {
-
-    // components[0].should.be.an.instanceOf(Object).and.not.empty();
-    // components[0].should.have.property('DOMElement');
-    // components[0].should.have.property('settings').Object();
-    // components[0].should.have.property('init').Function()
-    // components[0].should.have.property('handleClick').Function();
-
-  });
-
-
-  it('should attach the handleClick eventListener to DOMElement click event to toggle className', () => {
-
-    // components[0].DOMElement.click();
-    // Array.from(components[0].DOMElement.classList).should.containEql('clicked');
-    // components[0].DOMElement.click();
-    // Array.from(components[0].DOMElement.classList).should.not.containEql('clicked');
-
-  });
-
-
-  it('should throw an error if no elements are found', () => {
-
-    // Banner.init.bind(Banner, '.js-err').should.throw();
-
-  })
-  
-  it('should initialisation with different settings if different options are passed', () => {
-
-    // should(componentsTwo[0].settings.callback).not.equal(components[0].settings.callback);
-  
   });
 
 });
 
 
-describe('Callbacks', () => {
-
-  // it('should be passed in options', () => {
-
-  //   should(components[0].settings.callback).null();
-  //   should(componentsTwo[0].settings.callback).Function();
-
-  // });
-
-  // it('should execute in the context of the component', () => {
-
-  //   componentsTwo[0].DOMElement.click();
-  //   Array.from(componentsTwo[0].DOMElement.classList).should.containEql('callback-test');
-  //   componentsTwo[0].DOMElement.click();
-  //   Array.from(componentsTwo[0].DOMElement.classList).should.not.containEql('callback-test');
-
-  // });
-
-});
 
 describe('Component API', () => {
 
-  // it('should trigger the handleClick function toggling the className', () => {
+  it('should expose dismiss as an executable function that removes the banner from the DOM', () => {
+    cookieBanner.dismiss();
+    should(document.querySelector('.js-cookie-banner')).equal(null);
+  });
 
-  //   components[0].handleClick();
-  //   Array.from(components[0].DOMElement.classList).should.containEql('clicked');
-  //   components[0].handleClick();
-  //   Array.from(components[0].DOMElement.classList).should.not.containEql('clicked');
 
-  //  });
+});
+
+
+describe('Cookie', () => {
+  it('should set a cookie once dismissed', () => {
+    let cookieParts = document.cookie.split('=');
+
+    cookieParts[0].should.equal('__STORMID_MSG__');
+    cookieParts[1].should.equal('acknowledged');
+  });
+});
+
+describe('sessionStorage', () => {
+  it('should set a sessionStorage variable once dismissed', () => {
+    (window.sessionStorage.getItem('__STORMID_MSG__') == undefined).should.be.true();
+    sessionStorageBanner.dismiss();
+    window.sessionStorage.getItem('__STORMID_MSG__').should.equal('acknowledged');
+  });
+});
+
+describe('Options', () => {
+  it('should accept a callback that is executed after dismissal', () => {
+    //callback assigned an initialisation time...
+    //dismiss called in the test above...
+    document.body.classList.contains('foo').should.be.true;
+    
+  });
 
 });

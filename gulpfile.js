@@ -8,12 +8,12 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     babel = require('gulp-babel'),
     browserify = require('browserify'),
+    rollup = require('gulp-rollup'),
+	rollupNodeResolve = require('rollup-plugin-node-resolve'),
+    commonjs = require('rollup-plugin-commonjs'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     babelify = require( 'babelify'),
-	rollup = require('gulp-rollup'),
-	rollupNodeResolve = require('rollup-plugin-node-resolve'),
-    commonjs = require('rollup-plugin-commonjs'),
     browserSync = require('browser-sync'),
     ghPages = require('gulp-gh-pages'),
     runSequence = require('run-sequence'),
@@ -77,10 +77,7 @@ gulp.task('js:es5', function() {
             template: umdTemplate
         }))
         .pipe(header(banner, {pkg : pkg}))
-  		.pipe(rename({
-            basename: pkg.name,
-            suffix: '.standalone'
-        }))
+  		.pipe(rename({suffix: '.standalone'}))
 		.pipe(gulp.dest('dist/'));
 });
 
@@ -88,8 +85,10 @@ gulp.task('js:es5-rollup', function() {
 	return gulp.src('src/index.js')
         .pipe(rollup({
 			allowRealFiles: true,
-            entry: 'src/index.js',
-			format: 'es',
+            input: 'src/index.js',
+            output: {
+                format: 'es'
+            },
 			plugins: [
 				rollupNodeResolve(),
                 commonjs()
@@ -113,15 +112,13 @@ gulp.task('js:es5-rollup', function() {
 gulp.task('js:es6', function() {
     gulp.src('src/*.js')
         .pipe(plumber({errorHandler: onError}))
-        .pipe(header(banner, {pkg : pkg}))
 		.pipe(gulp.dest('dist/'));
 
-    return gulp.src('./src/libs/*.js')
-		.pipe(gulp.dest('./dist/libs/'));
+    return gulp.src('./src/lib/*.js')
+		.pipe(gulp.dest('./dist/lib/'));
 });
 
 gulp.task('js', ['js:es6', 'js:es5-rollup']);
-// gulp.task('js', ['js:es6', 'js:es5-browserify']);
 
 gulp.task('copy', function() {
     return gulp.src('./src/**/*.js')
@@ -140,12 +137,10 @@ gulp.task('example:import', function(){
         .pipe(gulp.dest('./example/js'));
 });
 gulp.task('example:async', function(){
-    return gulp.src('./dist/*.js')
+    return gulp.src('./dist/*.standalone.js')
 		.pipe(gulp.dest('./example/js/'));
 });
 gulp.task('example', ['example:import', 'example:async']);
-
-
 
 gulp.task('server', ['js', 'copy', 'example'], function() {
     browserSync({
