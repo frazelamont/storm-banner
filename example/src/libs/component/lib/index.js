@@ -15,7 +15,6 @@ const check = settings => {
 const dismiss = state => () => {
     save(state);
     state.settings.dismiss(state.banner);
-    !!(state.settings.callback && state.settings.callback.constructor && state.settings.callback.call && state.settings.callback.apply) && state.settings.callback.call(state.banner);
 };
 
 const initListener = state => {
@@ -34,7 +33,7 @@ export default (sel, settings) => {
         banner && banner.classList.remove(settings.hiddenBanner);
         !banner && document.body.firstElementChild.insertAdjacentHTML('beforebegin', settings.template(sel));
     } else {
-        if(!!banner) state.banner.parentNode.removeChild(state.banner);
+        if(!!banner) banner.parentNode.removeChild(banner);
         return;
     }
 

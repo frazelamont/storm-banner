@@ -1,6 +1,6 @@
 /**
  * @name storm-banner: Dismissible message banner saved to either sessionStorage, localStorage, or cookies. For cookie messages or any one-time notification.
- * @version 0.2.5: Thu, 15 Mar 2018 15:26:22 GMT
+ * @version 0.2.5: Thu, 15 Mar 2018 20:46:18 GMT
  * @author stormid
  * @license MIT
  */
@@ -74,7 +74,6 @@ var dismiss = function dismiss(state) {
     return function () {
         save(state);
         state.settings.dismiss(state.banner);
-        !!(state.settings.callback && state.settings.callback.constructor && state.settings.callback.call && state.settings.callback.apply) && state.settings.callback.call(state.banner);
     };
 };
 
@@ -94,7 +93,7 @@ var factory = function factory(sel, settings) {
         banner && banner.classList.remove(settings.hiddenBanner);
         !banner && document.body.firstElementChild.insertAdjacentHTML('beforebegin', settings.template(sel));
     } else {
-        if (!!banner) state.banner.parentNode.removeChild(state.banner);
+        if (!!banner) banner.parentNode.removeChild(banner);
         return;
     }
 
