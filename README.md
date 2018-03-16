@@ -99,6 +99,11 @@ Banner.init('.js-banner', {
 });
 ```
 
+## API
+```
+Banner.dismiss();
+```
+
 ## Tests
 ```
 npm run test
